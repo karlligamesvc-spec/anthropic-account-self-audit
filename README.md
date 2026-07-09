@@ -54,7 +54,3 @@ cp -R anthropic-account-self-audit/anthropic-account-self-audit "${CODEX_HOME:-$
 ## 安全边界
 
 这个 skill 用于合规自查、账号完整性检查、本机安全卫生和诚实申诉准备。不要用它绕过地区限制、掩盖违规行为、轮换账号、规避风控，或在已经被 enforcement 后继续进行不支持的使用。
-
-## 开源许可证
-
-正式对外传播前，建议补一个明确的开源许可证。
