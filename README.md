@@ -1,37 +1,35 @@
-# Anthropic Account Self Audit
+# Anthropic 账号自检 Skill
 
-[中文说明](README.zh-CN.md)
+这是一个面向 Claude Code 的 Codex skill，用来做 Anthropic 账号风险自检和本机环境卫生检查。
 
-A Codex skill for Claude Code-focused Anthropic account risk self-audits and local environment hygiene checks.
+它不是“防封工具”，也不是绕过风控或地区限制的工具。它的目标是帮用户看清本机有哪些可解释、可修复、需要自己确认的风险信号，并在需要时准备诚实的整改说明或申诉材料。
 
-This project is not an "anti-ban" or enforcement-bypass tool. It helps users inspect local Claude Code-related signals, understand what can and cannot be verified locally, apply explicitly authorized low-risk local fixes, and prepare honest remediation or appeal materials when needed.
+## 它会检查什么
 
-## What It Checks
+- Claude Code 相关环境变量名，但不会打印 secret 的具体值。
+- Claude Code 配置和状态文件路径，以及基础文件权限。
+- 当前仓库和部分 Claude Code 本地日志里疑似 key 的字符串形状。
+- 代理配置，以及可选的公网出口国家和云服务商线索。
+- 可选的浏览器语言、时区、GeoTime/GeoMirror 风格一致性信号。
+- 已安装 Claude Code 包里的字符串证据，只作为本机证据，不直接推断服务端意图。
 
-- Claude Code-related environment variable names, without printing secret values.
-- Claude Code config and state paths, including basic file permission hygiene.
-- Secret-shaped strings in the current repository and selected Claude Code local logs.
-- Proxy and optional public egress country/cloud hints.
-- Optional browser language, timezone, and GeoTime/GeoMirror-style consistency signals.
-- Installed Claude Code package string evidence, reported as local evidence only.
+默认不会扫描 Claude Desktop/App 缓存。
 
-The skill does not inspect Claude Desktop/App caches by default.
+## 它看不到什么
 
-## What It Cannot Know
+这个 skill 看不到 Anthropic 内部风控分、服务端封禁原因、账号创建 IP、支付历史、历史登录国家、警告邮件、申诉结果、请求级安全标记、其他设备和远程服务器上的行为。
 
-This skill cannot see Anthropic's internal enforcement state, server-side risk score, account creation IP, payment history, historical login countries, warnings, appeal outcomes, request-level safety flags, or activity on other devices and remote servers.
+所以它适合做“本机环境和使用习惯自检”，不能保证账号一定安全。
 
-It should be used as a local hygiene and workflow audit, not as a guarantee that an account is safe.
+## 安装
 
-## Install
-
-From Codex, ask the skill installer to install this GitHub path:
+在 Codex 里，可以让 skill installer 安装这个 GitHub 路径：
 
 ```text
-Use $skill-installer to install https://github.com/karlligamesvc-spec/anthropic-account-self-audit/tree/main/anthropic-account-self-audit
+使用 $skill-installer 安装 https://github.com/karlligamesvc-spec/anthropic-account-self-audit/tree/main/anthropic-account-self-audit
 ```
 
-Or clone manually and copy the skill folder into your Codex skills directory:
+也可以手动克隆后复制 skill 目录：
 
 ```bash
 git clone https://github.com/karlligamesvc-spec/anthropic-account-self-audit.git
@@ -39,24 +37,24 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R anthropic-account-self-audit/anthropic-account-self-audit "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-Restart Codex after installation so the new skill can be discovered.
+安装后重启 Codex，让新 skill 被识别。
 
-## Usage
+## 使用方式
 
-Ask Codex:
+对 Codex 说：
 
 ```text
-Use $anthropic-account-self-audit to analyze my Claude Code / Anthropic account risk.
+使用 $anthropic-account-self-audit 分析我的 Claude Code / Anthropic 账号风险。
 ```
 
-For a browser fingerprint consistency pass, mention browser language, timezone, proxy, GeoTime, or GeoMirror in the request.
+如果想检查浏览器画像一致性，可以在请求里提到浏览器语言、时区、代理、GeoTime 或 GeoMirror。
 
-The skill only applies local fixes after explicit user authorization.
+这个 skill 只有在用户明确授权后，才会执行本机低风险修改。
 
-## Safety Boundary
+## 安全边界
 
-This skill is designed for legitimate policy compliance, account-integrity review, local security hygiene, and honest appeal preparation. Do not use it to bypass regional restrictions, hide prohibited activity, rotate accounts, evade enforcement, or continue unsupported use after enforcement.
+这个 skill 用于合规自查、账号完整性检查、本机安全卫生和诚实申诉准备。不要用它绕过地区限制、掩盖违规行为、轮换账号、规避风控，或在已经被 enforcement 后继续进行不支持的使用。
 
-## License
+## 开源许可证
 
-Add a license before broader redistribution.
+正式对外传播前，建议补一个明确的开源许可证。
