@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anthropic Account Self Audit"
+  short_description: "Scan risk, fix basics, guide self-checks"
+  default_prompt: "Use $anthropic-account-self-audit to scan my Claude Code local environment, explain local risks in plain language, apply only explicitly authorized low-risk fixes, and list account-side facts I must check myself."
